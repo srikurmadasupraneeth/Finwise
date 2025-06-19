@@ -1,13 +1,16 @@
+import 'package:finwise_testing_project/Presentation/login/createaccount.dart';
+import 'package:finwise_testing_project/Presentation/login/Forgotpassword/forgotpassword.dart';
 import 'package:flutter/material.dart';
-import 'package:finwise_testing_project/widgets/uihelper.dart';
+import 'package:finwise_testing_project/Common/uihelper.dart';
+import 'package:finwise_testing_project/Presentation/login/login.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Loginscreen extends StatelessWidget {
+  const Loginscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1FFF3),
+      backgroundColor: Color(0xFFF1FFF3),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -35,13 +38,18 @@ class Home extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF00D09E),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
                   child: const Text("Log In", style: TextStyle(fontSize: 16)),
                 ),
@@ -52,7 +60,14 @@ class Home extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Createaccount(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFDFFDF7),
                     shape: RoundedRectangleBorder(
@@ -70,7 +85,14 @@ class Home extends StatelessWidget {
               const SizedBox(height: 15),
 
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Forgotpassword(),
+                    ),
+                  );
+                },
                 child: const Text(
                   "Forgot Password?",
                   style: TextStyle(

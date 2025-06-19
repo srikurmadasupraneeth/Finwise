@@ -1,6 +1,6 @@
+import 'package:finwise_testing_project/Presentation/Onboarding/onboarding_swipe.dart';
 import 'package:flutter/material.dart';
-import 'package:finwise_testing_project/widgets/uihelper.dart';
-import 'package:finwise_testing_project/pages/home.dart';
+import 'package:finwise_testing_project/Common/uihelper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => const OnboardingSwipe()),
       );
     });
   }
