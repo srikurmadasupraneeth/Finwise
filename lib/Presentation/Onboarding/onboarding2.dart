@@ -30,7 +30,7 @@ class Onboarding2 extends StatelessWidget {
                   fontsize: 30,
                 ),
                 Uihelper.customText(
-                  text: 'Your Finaces?',
+                  text: 'Your Finances?',
                   color: const Color(0xFF0E3E3E),
                   fontweight: FontWeight.bold,
                   fontsize: 30,

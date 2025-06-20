@@ -54,7 +54,7 @@ class _NewpasswordState extends State<Newpassword> {
                   ),
                   const SizedBox(height: 10),
                   Uihelper.customTextField(
-                    hintText: "Enter the New Desired",
+                    hintText: "Enter the New Desired Password",
                     controller: newPasswordController,
                     fillColor: Color(0xFFDFF7E2),
                   ),
