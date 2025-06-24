@@ -18,17 +18,17 @@ class _FinalpagesState extends State<Finalpages> {
 
   final List<Widget> _pages = const [
     Homepage(),
-    Categories(),
     Analysis(),
     Transactions(),
+    Categories(),
     Profile(),
   ];
 
   final List<String> _icons = [
     "Home.png",
-    "Category.png",
     "Analysis.png",
     "Transactions.png",
+    "Category.png",
     "Profile.png",
   ];
 

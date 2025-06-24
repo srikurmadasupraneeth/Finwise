@@ -10,11 +10,114 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
+
   void _onTabTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  List<Widget> _getSelectedTabContent() {
+    if (_selectedIndex == 0) {
+      return [
+        ListTile(
+          leading: Uihelper.customImage(img: "Food.png"),
+          title: Uihelper.customText(
+            text: "Pizza",
+            color: const Color(0xFF052224),
+            fontsize: 16,
+            fontweight: FontWeight.bold,
+          ),
+          subtitle: Uihelper.customText(
+            text: "11:00 AM - Today",
+            color: Colors.grey,
+            fontsize: 14,
+            fontweight: FontWeight.normal,
+          ),
+          trailing: Uihelper.customText(
+            text: "-\$20.00",
+            color: Colors.blue,
+            fontsize: 16,
+            fontweight: FontWeight.bold,
+          ),
+        ),
+      ];
+    } else if (_selectedIndex == 1) {
+      return [
+        ListTile(
+          leading: Uihelper.customImage(img: "petrol-pump.png"),
+          title: Uihelper.customText(
+            text: "Petrol",
+            color: const Color(0xFF052224),
+            fontsize: 16,
+            fontweight: FontWeight.bold,
+          ),
+          subtitle: Uihelper.customText(
+            text: "14:00 - This Week",
+            color: Colors.grey,
+            fontsize: 14,
+            fontweight: FontWeight.normal,
+          ),
+          trailing: Uihelper.customText(
+            text: "-\$50.00",
+            color: Colors.blue,
+            fontsize: 16,
+            fontweight: FontWeight.bold,
+          ),
+        ),
+      ];
+    } else {
+      return [
+        _buildTransactionItem(
+          "Salary",
+          "18:27 - April 30",
+          "\$4,000.00",
+          "Icon Salary.png",
+        ),
+        _buildTransactionItem(
+          "Groceries",
+          "17:00 - April 24",
+          "-\$100.00",
+          "Icon Groceries.png",
+        ),
+        _buildTransactionItem(
+          "Rent",
+          "8:30 - April 15",
+          "-\$674.40",
+          "Icon Rent.png",
+        ),
+      ];
+    }
+  }
+
+  Widget _buildTransactionItem(
+    String title,
+    String time,
+    String amount,
+    String icon,
+  ) {
+    return ListTile(
+      leading: Uihelper.customImage(img: icon),
+      title: Uihelper.customText(
+        text: title,
+        color: const Color(0xFF052224),
+        fontsize: 16,
+        fontweight: FontWeight.bold,
+      ),
+      subtitle: Uihelper.customText(
+        text: time,
+        color: Colors.grey,
+        fontsize: 14,
+        fontweight: FontWeight.normal,
+      ),
+      trailing: Uihelper.customText(
+        text: amount,
+        color: amount.contains('-') ? Colors.blue : Colors.green,
+        fontsize: 16,
+        fontweight: FontWeight.bold,
+      ),
+    );
   }
 
   @override
@@ -28,7 +131,7 @@ class _HomepageState extends State<Homepage> {
             left: 0,
             right: 0,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.51,
+              height: MediaQuery.of(context).size.height * 0.53,
               padding: const EdgeInsets.only(top: 20),
               decoration: const BoxDecoration(
                 color: Color(0xFFF1FFF3),
@@ -48,7 +151,7 @@ class _HomepageState extends State<Homepage> {
                       width: double.infinity,
                       height: 180,
                       decoration: BoxDecoration(
-                        color: Color(0xFF00D09E),
+                        color: const Color(0xFF00D09E),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Padding(
@@ -149,77 +252,62 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFDFF7E2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () => _onTabTapped(0),
+                    const SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xFFDFF7E2,
+                        ), // Light green background
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(3, (index) {
+                          final labels = ['Daily', 'Weekly', 'Monthly'];
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => _onTabTapped(index),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                margin: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: _selectedIndex == index
+                                      ? const Color(
+                                          0xFF00D09E,
+                                        ) // Highlight color
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                alignment: Alignment.center,
                                 child: Uihelper.customText(
-                                  text: "Daily",
-                                  color: _selectedIndex == 0
-                                      ? Color(0xFF00D09E)
-                                      : Color(0xFF052224),
-                                  fontweight: _selectedIndex == 0
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
+                                  text: labels[index],
+                                  color: _selectedIndex == index
+                                      ? Colors.white
+                                      : const Color(0xFF052224),
+                                  fontweight: FontWeight.bold,
                                   fontsize: 16,
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () => _onTabTapped(1),
-                                child: Uihelper.customText(
-                                  text: "Weekly",
-                                  color: _selectedIndex == 1
-                                      ? Color(0xFF00D09E)
-                                      : Color(0xFF052224),
-                                  fontweight: _selectedIndex == 1
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  fontsize: 16,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () => _onTabTapped(2),
-                                child: Uihelper.customText(
-                                  text: "Monthly",
-                                  color: _selectedIndex == 2
-                                      ? Color(0xFF00D09E)
-                                      : Color(0xFF052224),
-                                  fontweight: _selectedIndex == 2
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  fontsize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        }),
                       ),
                     ),
+
+                    const SizedBox(height: 10),
+                    ..._getSelectedTabContent(),
                   ],
                 ),
               ),
             ),
           ),
-
-          // Top section above white container
           Padding(
             padding: const EdgeInsets.only(top: 100, left: 30, right: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -261,8 +349,6 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-
-                // Balance + Expense
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -275,8 +361,8 @@ class _HomepageState extends State<Homepage> {
                             const SizedBox(width: 6),
                             Uihelper.customText(
                               text: "Total Balance",
-                              color: Color(0xFF093030),
-                              fontsize: 16,
+                              color: const Color(0xFF093030),
+                              fontsize: 14,
                               fontweight: FontWeight.normal,
                             ),
                           ],
@@ -284,13 +370,17 @@ class _HomepageState extends State<Homepage> {
                         const SizedBox(height: 6),
                         Uihelper.customText(
                           text: "\$7,783.00",
-                          color: Color(0xFFF1FFF3),
-                          fontsize: 26,
+                          color: const Color(0xFFF1FFF3),
+                          fontsize: 24,
                           fontweight: FontWeight.bold,
                         ),
                       ],
                     ),
-                    Container(width: 1, height: 50, color: Color(0xFFDFF7E2)),
+                    Container(
+                      width: 1,
+                      height: 50,
+                      color: const Color(0xFFDFF7E2),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -300,8 +390,8 @@ class _HomepageState extends State<Homepage> {
                             const SizedBox(width: 6),
                             Uihelper.customText(
                               text: "Total Expense",
-                              color: Color(0xFF093030),
-                              fontsize: 16,
+                              color: const Color(0xFF093030),
+                              fontsize: 14,
                               fontweight: FontWeight.normal,
                             ),
                           ],
@@ -309,18 +399,15 @@ class _HomepageState extends State<Homepage> {
                         const SizedBox(height: 6),
                         Uihelper.customText(
                           text: "-\$1,187.40",
-                          color: Color(0xFF0068FF),
-                          fontsize: 26,
+                          color: const Color(0xFF0068FF),
+                          fontsize: 24,
                           fontweight: FontWeight.bold,
                         ),
                       ],
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 20),
-
-                // Progress Bar
                 Stack(
                   children: [
                     Container(
@@ -335,39 +422,38 @@ class _HomepageState extends State<Homepage> {
                       child: Container(
                         height: 28,
                         decoration: BoxDecoration(
-                          color: Color(0xFF052224),
+                          color: const Color(0xFF052224),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.only(left: 16),
                         child: Uihelper.customText(
                           text: "30%",
-                          color: Color(0xFFF1FFF3),
+                          color: const Color(0xFFF1FFF3),
                           fontsize: 12,
                           fontweight: FontWeight.normal,
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       right: 16,
                       top: 6,
-                      child: Uihelper.customText(
-                        text: "\$20,000.00",
-                        color: Color(0xFF052224),
-                        fontweight: FontWeight.normal,
-                        fontsize: 12,
+                      child: Text(
+                        "\$20,000.00",
+                        style: TextStyle(
+                          color: Color(0xFF052224),
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 10),
-
                 Uihelper.customText(
                   text: "30% of your expenses, looks good.",
-                  color: Color(0xFF052224),
-                  fontsize: 15,
-                  fontweight: FontWeight.normal,
+                  color: const Color(0xFF052224),
+                  fontsize: 14,
+                  fontweight: FontWeight.w500,
                 ),
               ],
             ),
