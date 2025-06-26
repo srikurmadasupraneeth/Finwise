@@ -3,9 +3,15 @@ import 'package:finwise_testing_project/Common/uihelper.dart';
 import 'package:finwise_testing_project/Presentation/pages/Home/notificationpage.dart';
 import 'package:finwise_testing_project/Presentation/pages/finalpages.dart';
 
-class Transactions extends StatelessWidget {
+class Transactions extends StatefulWidget {
   const Transactions({super.key});
 
+  @override
+  State<Transactions> createState() => _TransactionsState();
+}
+
+class _TransactionsState extends State<Transactions> {
+  String? selectedTab;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,92 +72,129 @@ class Transactions extends StatelessWidget {
             right: 20,
             child: Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 150,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF1FFF3),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    children: [
-                      Uihelper.customText(
-                        text: "Total Balance",
-                        fontsize: 14,
-                        color: Color(0xFF093030),
-                        fontweight: FontWeight.normal,
-                      ),
-                      const SizedBox(height: 5),
-                      Uihelper.customText(
-                        text: "\$7,783.00",
-                        fontsize: 20,
-                        color: Color(0xFF093030),
-                        fontweight: FontWeight.bold,
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedTab = null;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 150,
+                    ),
+                    decoration: BoxDecoration(
+                      color: selectedTab == null
+                          ? Colors.red
+                          : Color(0xFFF1FFF3),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                        Uihelper.customText(
+                          text: "Total Balance",
+                          fontsize: 14,
+                          color: Color(0xFF093030),
+                          fontweight: FontWeight.normal,
+                        ),
+                        const SizedBox(height: 5),
+                        Uihelper.customText(
+                          text: "\$7,783.00",
+                          fontsize: 20,
+                          color: Color(0xFF093030),
+                          fontweight: FontWeight.bold,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     // Income
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF1FFF3),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          children: [
-                            Uihelper.customImage(img: "Group 395.png"),
-                            const SizedBox(height: 5),
-                            Uihelper.customText(
-                              text: "Income",
-                              fontsize: 14,
-                              color: Color(0xFF093030),
-                              fontweight: FontWeight.normal,
-                            ),
-                            const SizedBox(height: 5),
-                            Uihelper.customText(
-                              text: "\$4,120.00",
-                              fontsize: 18,
-                              color: Color(0xFF093030),
-                              fontweight: FontWeight.bold,
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedTab = 'income';
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: selectedTab == 'income'
+                                ? Colors.red
+                                : Color(0xFFF1FFF3),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Uihelper.customImage(img: "Group 395.png"),
+                              const SizedBox(height: 5),
+                              Uihelper.customText(
+                                text: "Income",
+                                fontsize: 14,
+                                color: selectedTab == 'income'
+                                    ? Color(0xFFF1FFF3)
+                                    : Color(0xFF093030),
+                                fontweight: FontWeight.normal,
+                              ),
+                              const SizedBox(height: 5),
+                              Uihelper.customText(
+                                text: "\$4,120.00",
+                                fontsize: 18,
+                                color: selectedTab == 'Income'
+                                    ? Color(0xFFF1FFF3)
+                                    : Color(0xFF093030),
+                                fontweight: FontWeight.bold,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 15),
+
                     // Expense
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF1FFF3),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          children: [
-                            Uihelper.customImage(img: "Group 396.png"),
-                            const SizedBox(height: 5),
-                            Uihelper.customText(
-                              text: "Expense",
-                              fontsize: 14,
-                              color: Color(0xFF093030),
-                              fontweight: FontWeight.normal,
-                            ),
-                            const SizedBox(height: 5),
-                            Uihelper.customText(
-                              text: "\$1,187.40",
-                              fontsize: 18,
-                              color: Color(0xFF093030),
-                              fontweight: FontWeight.bold,
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedTab = 'expense';
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: selectedTab == 'expense'
+                                ? Colors.red
+                                : Color(0xFFF1FFF3),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Uihelper.customImage(img: "Group 396.png"),
+                              const SizedBox(height: 5),
+                              Uihelper.customText(
+                                text: "Expense",
+                                fontsize: 14,
+                                color: selectedTab == 'Income'
+                                    ? Color(0xFFF1FFF3)
+                                    : Color(0xFF093030),
+                                fontweight: FontWeight.normal,
+                              ),
+                              const SizedBox(height: 5),
+                              Uihelper.customText(
+                                text: "\$1,187.40",
+                                fontsize: 18,
+                                color: selectedTab == 'Income'
+                                    ? Color(0xFFF1FFF3)
+                                    : Color(0xFF093030),
+                                fontweight: FontWeight.bold,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -188,40 +231,162 @@ class Transactions extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
 
-                      transactionTile(
-                        title: "Salary",
-                        subtitle: "18:27 - April 30",
-                        category: "Monthly",
-                        amount: "\$4,000.00",
-                        isIncome: true,
-                        iconPath: "assets/images/Icon Salary.png",
-                      ),
-                      transactionTile(
-                        title: "Groceries",
-                        subtitle: "17:00 - April 24",
-                        category: "Pantry",
-                        amount: "-\$100.00",
-                        isIncome: false,
-                        iconPath: "assets/images/Icon Groceries.png",
-                      ),
-                      transactionTile(
-                        title: "Rent",
-                        subtitle: "8:30 - April 15",
-                        category: "Rent",
-                        amount: "-\$674.40",
-                        isIncome: false,
-                        iconPath: "assets/images/Icon Rent.png",
-                      ),
-                      transactionTile(
-                        title: "Transport",
-                        subtitle: "7:30 - April 08",
-                        category: "Fuel",
-                        amount: "-\$4.13",
-                        isIncome: false,
-                        iconPath: "assets/images/Icon transport (1).png",
-                      ),
+                      if (selectedTab == null) ...[
+                        transactionTile(
+                          title: "Salary",
+                          subtitle: "18:27 - April 30",
+                          category: "Monthly",
+                          amount: "\$4,000.00",
+                          isIncome: true,
+                          iconPath: "assets/images/Icon Salary.png",
+                        ),
+                        transactionTile(
+                          title: "Groceries",
+                          subtitle: "17:00 - April 24",
+                          category: "Pantry",
+                          amount: "-\$100.00",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon Groceries.png",
+                        ),
+                        transactionTile(
+                          title: "Rent",
+                          subtitle: "8:30 - April 15",
+                          category: "Rent",
+                          amount: "-\$674.40",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon Rent.png",
+                        ),
+                        transactionTile(
+                          title: "Transport",
+                          subtitle: "7:30 - April 08",
+                          category: "Fuel",
+                          amount: "-\$4.13",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon transport (1).png",
+                        ),
+                        const SizedBox(height: 10),
+                        Uihelper.customText(
+                          text: "March",
+                          fontsize: 14,
+                          fontweight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        transactionTile(
+                          title: "Food",
+                          subtitle: "19:30 - March 31",
+                          category: "Dinner",
+                          amount: "-\$70.40",
+                          isIncome: false,
+                          iconPath: "assets/images/Food.png",
+                        ),
+                      ] else if (selectedTab == 'income') ...[
+                        transactionTile(
+                          title: "Salary",
+                          subtitle: "18:27 - April 30",
+                          category: "Monthly",
+                          amount: "\$4,000.00",
+                          isIncome: true,
+                          iconPath: "assets/images/Icon Salary.png",
+                        ),
+                        transactionTile(
+                          title: "Others",
+                          subtitle: "17:00 - April 24",
+                          category: "Payments",
+                          amount: "\$120.00",
+                          isIncome: true,
+                          iconPath: "assets/images/Icon Salary.png",
+                        ),
+                        const SizedBox(height: 10),
+                        Uihelper.customText(
+                          text: "March",
+                          fontsize: 14,
+                          fontweight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        transactionTile(
+                          title: "Salary",
+                          subtitle: "18:39 - March 31",
+                          category: "Monthly",
+                          amount: "\$4,000.00",
+                          isIncome: true,
+                          iconPath: "assets/images/Icon Salary.png",
+                        ),
+                        transactionTile(
+                          title: "Others",
+                          subtitle: "9:30 - April 12",
+                          category: "Upwork",
+                          amount: "\$340.00",
+                          isIncome: true,
+                          iconPath: "assets/images/Icon Salary.png",
+                        ),
+                        const SizedBox(height: 10),
+                        Uihelper.customText(
+                          text: "February",
+                          fontsize: 14,
+                          fontweight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
 
-                      const SizedBox(height: 5),
+                        transactionTile(
+                          title: "Others",
+                          subtitle: "18:30 - March 31",
+                          category: "Upwork",
+                          amount: "\$340.00",
+                          isIncome: true,
+                          iconPath: "assets/images/Icon Salary.png",
+                        ),
+                      ] else if (selectedTab == 'expense') ...[
+                        transactionTile(
+                          title: "Groceries",
+                          subtitle: "17:00 - April 24",
+                          category: "Pantry",
+                          amount: "-\$100.00",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon Groceries.png",
+                        ),
+                        transactionTile(
+                          title: "Rent",
+                          subtitle: "8:30 - April 15",
+                          category: "Rent",
+                          amount: "-\$674.40",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon Rent.png",
+                        ),
+                        transactionTile(
+                          title: "Transport",
+                          subtitle: "7:30 - April 08",
+                          category: "Fuel",
+                          amount: "-\$4.13",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon transport (1).png",
+                        ),
+                        const SizedBox(height: 10),
+                        Uihelper.customText(
+                          text: "March",
+                          fontsize: 14,
+                          fontweight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+
+                        transactionTile(
+                          title: "Food",
+                          subtitle: "19:30 - March 31",
+                          category: "Dinner",
+                          amount: "-\$70.40",
+                          isIncome: false,
+                          iconPath: "assets/images/Food.png",
+                        ),
+                        transactionTile(
+                          title: "Rent",
+                          subtitle: "18:39 - March 31",
+                          category: "Rent",
+                          amount: "-\$674.40",
+                          isIncome: false,
+                          iconPath: "assets/images/Icon Rent.png",
+                        ),
+                      ],
+
+                      const SizedBox(height: 10),
                       Uihelper.customText(
                         text: "March",
                         fontsize: 14,
@@ -229,15 +394,7 @@ class Transactions extends StatelessWidget {
                         color: Colors.black,
                       ),
                       const SizedBox(height: 5),
-
-                      transactionTile(
-                        title: "Food",
-                        subtitle: "7:30 - March 21",
-                        category: "Dinner",
-                        amount: "-\$70.40",
-                        isIncome: false,
-                        iconPath: "assets/images/Food.png",
-                      ),
+                      // Add matching March data if needed per section
                     ],
                   ),
                 ),
